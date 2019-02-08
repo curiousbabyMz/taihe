@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <page />
+    <Logo
+      @logotap="logotap"
+      :isTurn='isTurn'
+    />
   </div>
 </template>
 <style>
@@ -10,11 +13,26 @@
 </style>
 
 <script>
-import Page from "@/components/page.vue";
 export default {
   name: "Index",
   components: {
-    page: () => import("@/components/page.vue")
+    Logo: () => import("@/components/logo.vue")
+  },
+  data: function() {
+    return {
+      isTurn: false
+    };
+  },
+  methods: {
+    logotap: function() {
+      this.isTurn = true;
+      let time = setTimeout(() => {
+        clearTimeout(time);
+        this.$router.push({
+          name: "home"
+        });
+      }, 1200);
+    }
   }
 };
 </script>
